@@ -10,21 +10,31 @@ export default function Contact() {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [sent, setSent] = useState(false);
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
-    
+
     const formData = new FormData(e.target);
-    fetch("/", {
-      method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: new URLSearchParams(formData).toString(),
-    })
-      .then(() => {
+    // IMPORTANT: Paste your Web3Forms Access Key below
+    formData.append("e284b37b-9393-4dd3-b43c-64fa0fee0e6a");
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
         setSent(true);
         setTimeout(() => setSent(false), 4000);
         setForm({ name: "", email: "", message: "" });
-      })
-      .catch((error) => console.error("Error submitting form:", error));
+      } else {
+        console.error("Form error:", data);
+      }
+    } catch (error) {
+      console.error("Error submitting form:", error);
+    }
   };
 
   return (
@@ -45,8 +55,7 @@ export default function Contact() {
               ))}
             </div>
           </div>
-          <form className="contact-form" name="contact" method="POST" data-netlify="true" onSubmit={onSubmit}>
-            <input type="hidden" name="form-name" value="contact" />
+          <form className="contact-form" onSubmit={onSubmit}>
             {sent && <div className="success-toast" style={{ color: "var(--cyan)", fontWeight: 600 }}>✓ Message sent successfully!</div>}
             <input className="form-input" type="text" name="name" placeholder="Name" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} required />
             <input className="form-input" type="email" name="email" placeholder="Email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} required />
