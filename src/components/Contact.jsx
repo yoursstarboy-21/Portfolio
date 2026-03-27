@@ -13,14 +13,19 @@ export default function Contact() {
   const onSubmit = async (e) => {
     e.preventDefault();
 
-    const formData = new FormData(e.target);
-    // IMPORTANT: Paste your Web3Forms Access Key below
-    formData.append("access_key", "e284b37b-9393-4dd3-b43c-64fa0fee0e6a");
-
     try {
       const response = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
-        body: formData
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json"
+        },
+        body: JSON.stringify({
+          access_key: "e284b37b-9393-4dd3-b43c-64fa0fee0e6a",
+          name: form.name,
+          email: form.email,
+          message: form.message
+        })
       });
 
       const data = await response.json();
@@ -31,9 +36,11 @@ export default function Contact() {
         setForm({ name: "", email: "", message: "" });
       } else {
         console.error("Form error:", data);
+        alert("Sorry, there was an issue sending your message.");
       }
     } catch (error) {
       console.error("Error submitting form:", error);
+      alert("Something went wrong. Please check your internet connection.");
     }
   };
 
