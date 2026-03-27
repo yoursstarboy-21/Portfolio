@@ -21,23 +21,27 @@ export default function Hero() {
     // Typing and deleting speeds
     const typingSpeed = 100;
     const deletingSpeed = 50;
-    
+
+    // Check if typing is complete
+    if (!isDeleting && text === currentRole) {
+      ticker = setTimeout(() => setIsDeleting(true), 2000);
+      return () => clearTimeout(ticker);
+    }
+
+    // Check if deleting is complete
+    if (isDeleting && text === "") {
+      ticker = setTimeout(() => {
+        setIsDeleting(false);
+        setLoopNum(prev => prev + 1);
+      }, 500);
+      return () => clearTimeout(ticker);
+    }
+
+    // Type or delete
     if (isDeleting) {
       ticker = setTimeout(() => setText(currentRole.substring(0, text.length - 1)), deletingSpeed);
     } else {
       ticker = setTimeout(() => setText(currentRole.substring(0, text.length + 1)), typingSpeed);
-    }
-
-    // Pause when full word is typed
-    if (!isDeleting && text === currentRole) {
-      clearTimeout(ticker);
-      ticker = setTimeout(() => setIsDeleting(true), 2000);
-    } 
-    // Move to next word when deleted
-    else if (isDeleting && text === "") {
-      clearTimeout(ticker);
-      setIsDeleting(false);
-      setLoopNum(loopNum + 1);
     }
 
     return () => clearTimeout(ticker);

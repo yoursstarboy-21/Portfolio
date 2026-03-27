@@ -1,7 +1,7 @@
 import https from 'https';
 
 const data = JSON.stringify({
-  access_key: 'e284b37b-9393-4dd3-b43c-64fa0fee0e6a',
+  access_key: '01de425b-748e-47df-9f2b-08eed50b3f05',
   name: 'Antigravity Test',
   email: 'test@example.com',
   message: 'Testing the form from terminal'

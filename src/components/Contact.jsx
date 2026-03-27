@@ -1,4 +1,5 @@
 import { useState } from "react";
+import emailjs from "@emailjs/browser";
 
 const contactLinks = [
   { icon: "✉", label: "Email", value: "EMail", href: "mailto:loki210905@gmail.com" },
@@ -18,32 +19,42 @@ export default function Contact() {
     setLoading(true);
 
     try {
-      const response = await fetch("https://basin.io/api/v1/submit", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email: "loki210905@gmail.com",
-          name: form.name,
-          from_email: form.email,
-          message: form.message,
-        }),
-      });
+      console.log("Starting EmailJS submission...");
+      // These will be filled with the user's IDs
+      const serviceId = "service_uvh0pun";
+      const templateId = "template_z2bv08a";
+      const publicKey = "9fsSYDfUfZZ_imiJ0";
 
-      if (response.ok) {
+      // Initialize EmailJS
+      emailjs.init(publicKey);
+
+      const templateParams = {
+        from_name: form.name,
+        from_email: form.email,
+        message: form.message,
+        to_name: "Lokesh",
+      };
+
+      console.log("Sending with params:", templateParams);
+
+      const result = await emailjs.send(serviceId, templateId, templateParams, publicKey);
+      console.log("EmailJS Final Result:", result);
+
+      if (result.status === 200) {
         setSent(true);
         setLoading(false);
-        setTimeout(() => setSent(false), 4000);
+        alert("✓ Success! Email sent to EmailJS servers.");
+        setTimeout(() => setSent(false), 5000);
         setForm({ name: "", email: "", message: "" });
       } else {
-        throw new Error("Form submission failed");
+        throw new Error("Submission failed with status: " + result.status);
       }
     } catch (error) {
-      console.error("Error submitting form:", error);
-      setError(true);
+      console.error("EmailJS Critical Error:", error);
+      alert("✗ Error: " + (error.text || error.message || "Unknown error"));
+      setError(error.text || error.message || "Network Error");
       setLoading(false);
-      setTimeout(() => setError(false), 4000);
+      setTimeout(() => setError(false), 5000);
     }
   };
 
@@ -66,8 +77,8 @@ export default function Contact() {
             </div>
           </div>
           <form className="contact-form" onSubmit={onSubmit}>
-            {sent && <div className="success-toast" style={{ color: "var(--cyan)", fontWeight: 600 }}>✓ Message sent successfully!</div>}
-            {error && <div className="success-toast" style={{ color: "#ff6b6b", fontWeight: 600 }}>✗ Error sending message. Please try again.</div>}
+            {sent && <div className="success-toast" style={{ color: "var(--cyan)", fontWeight: 600 }}>✓ Message sent! Check your inbox.</div>}
+            {error && <div className="success-toast" style={{ color: "#ff6b6b", fontWeight: 600 }}>✗ {error}</div>}
             <input className="form-input" type="text" name="name" placeholder="Name" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} required disabled={loading} />
             <input className="form-input" type="email" name="email" placeholder="Email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} required disabled={loading} />
             <textarea className="form-textarea" name="message" placeholder="Message" value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} required disabled={loading} />
