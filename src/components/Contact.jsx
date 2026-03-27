@@ -19,7 +19,6 @@ export default function Contact() {
     setLoading(true);
 
     try {
-      console.log("Starting EmailJS submission...");
       // These will be filled with the user's IDs
       const serviceId = "service_uvh0pun";
       const templateId = "template_z2bv08a";
@@ -35,23 +34,18 @@ export default function Contact() {
         to_name: "Lokesh",
       };
 
-      console.log("Sending with params:", templateParams);
-
       const result = await emailjs.send(serviceId, templateId, templateParams, publicKey);
-      console.log("EmailJS Final Result:", result);
 
       if (result.status === 200) {
         setSent(true);
         setLoading(false);
-        alert("✓ Success! Email sent to EmailJS servers.");
         setTimeout(() => setSent(false), 5000);
         setForm({ name: "", email: "", message: "" });
       } else {
-        throw new Error("Submission failed with status: " + result.status);
+        throw new Error("Submission failed");
       }
     } catch (error) {
-      console.error("EmailJS Critical Error:", error);
-      alert("✗ Error: " + (error.text || error.message || "Unknown error"));
+      console.error("EmailJS Error:", error);
       setError(error.text || error.message || "Network Error");
       setLoading(false);
       setTimeout(() => setError(false), 5000);
