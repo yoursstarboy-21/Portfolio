@@ -301,4 +301,47 @@ section {
 
 .fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
 .fade-in.visible { opacity: 1; transform: translateY(0); }
-@media (max-width: 768px) { .contact-grid { grid-template-columns: 1fr; } .edu-row { grid-template-columns: 1fr; } .edu-slot-left, .edu-slot-right { padding: 0; justify-content: flex-start; } .edu-center-line, .edu-dot-wrap { display: none; } .about-card { grid-template-columns: 1fr; } }
+
+/* ─── Responsiveness & Media Queries ────────────────────────── */
+@media (max-width: 1024px) {
+  .hero-name { font-size: clamp(3rem, 7vw, 5rem); }
+  .about-card { gap: 30px; }
+  .projects-grid { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+}
+
+@media (max-width: 768px) {
+  section { padding: 60px 20px 70px; }
+  .hero-name { font-size: 3.5rem; letter-spacing: -1px; }
+  .hero-role { font-size: 1.4rem; }
+  .hero-bio { font-size: 1rem; margin-bottom: 30px; }
+  .hero-btns { flex-direction: column; width: 100%; align-items: center; gap: 12px; margin-bottom: 40px; }
+  .btn-primary, .btn-outline { width: 260px; padding: 12px 20px; font-size: 0.85rem; justify-content: center; }
+
+  .about-card { grid-template-columns: 1fr; gap: 30px; padding: 30px 20px; }
+  .about-avatar { width: 120px; height: 120px; }
+  .about-stats { grid-template-columns: 1fr; gap: 12px; }
+  .about-stat { padding: 15px; }
+
+  .edu-row { grid-template-columns: 1fr; margin-bottom: 30px; }
+  .edu-slot-left, .edu-slot-right { padding: 0; justify-content: flex-start; }
+  .edu-center-line, .edu-dot-wrap { display: none; }
+  .edu-card { padding: 24px; }
+
+  .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+  .contact-info { text-align: center; }
+  .contact-links { align-items: center; }
+
+  .dock-nav { bottom: 15px; padding: 8px 10px; gap: 4px; }
+  .dock-btn { width: 40px; height: 40px; }
+  .dock-icon-wrapper { width: 18px; height: 18px; }
+  .dock-tooltip { display: none; }
+}
+
+@media (max-width: 480px) {
+  .hero-name { font-size: 2.8rem; }
+  .hero-role { font-size: 1.2rem; letter-spacing: 1px; }
+  .section-title { font-size: 2.2rem; }
+  .about-stat .stat-num { font-size: 1.6rem; }
+  .skill-circle-inner { width: 90px; height: 90px; }
+  .skill-logo { width: 44px; height: 44px; }
+}

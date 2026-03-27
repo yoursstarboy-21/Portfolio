@@ -4,7 +4,7 @@ const education = [
     degree: "B.Tech AI&DS",
     full: "Bachelor of Technology in Artificial Intelligence & Data Science",
     institute: "Muthayammal Engineering College",
-    years: "2022 – Present",
+    years: "2023 – 2027",
     location: "Rasipuram, Tamil Nadu",
   },
   {
