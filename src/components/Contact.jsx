@@ -31,7 +31,8 @@ export default function Contact() {
         from_name: form.name,
         from_email: form.email,
         reply_to: form.email,
-        message: `From: ${form.name} (${form.email})\n\nMessage: ${form.message}`,
+        message: `FROM: ${form.name}\nEMAIL: ${form.email}\n\nMESSAGE:\n${form.message}`,
+        subject: `New Message from ${form.name} (${form.email})`,
         to_name: "Lokesh",
       };
 
