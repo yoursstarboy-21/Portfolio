@@ -2,7 +2,7 @@ import { useState } from "react";
 import emailjs from "@emailjs/browser";
 
 const contactLinks = [
-  { icon: "✉", label: "Email", value: "EMail", href: "mailto:loki210905@gmail.com" },
+  { icon: "✉", label: "Email", value: "Email", href: "mailto:loki210905@gmail.com" },
   { icon: "in", label: "LinkedIn", value: "Linkedin", href: "https://www.linkedin.com/in/lokesh-k-12360b2a5" },
   { icon: "🐙", label: "GitHub", value: "Github", href: "https://github.com/yoursstarboy-21" },
 ];
@@ -30,7 +30,8 @@ export default function Contact() {
       const templateParams = {
         from_name: form.name,
         from_email: form.email,
-        message: form.message,
+        reply_to: form.email,
+        message: `From: ${form.name} (${form.email})\n\nMessage: ${form.message}`,
         to_name: "Lokesh",
       };
 
