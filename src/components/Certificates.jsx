@@ -2,7 +2,7 @@ import { useState } from "react";
 
 const certs = [
   {
-    title: "IoT",
+    title: "IoT with Silver Badge",
     issuer: "NPTEL",
     year: "Jan-Apr 2026",
     logo: "/Iot.jpg",
