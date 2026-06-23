@@ -2,6 +2,42 @@ import { useState } from "react";
 
 const certs = [
   {
+    title: "IoT",
+    issuer: "NPTEL",
+    year: "Jan-Apr 2026",
+    logo: "/Iot.jpg",
+  },
+  {
+    title: "Core Java",
+    issuer: "BBC",
+    year: "2025",
+    logo: "/bbc.jpeg",
+  },
+  {
+    title: "Tamil Typing (Senior)",
+    issuer: "Typing Academy",
+    year: "2025",
+    logo: "/TamilTySr.jpeg",
+  },
+  {
+    title: "Tamil Typing (Junior)",
+    issuer: "Typing Academy",
+    year: "2025",
+    logo: "/TamilTyJr.jpeg",
+  },
+  {
+    title: "English Typing (Junior)",
+    issuer: "Typing Academy",
+    year: "2019",
+    logo: "/EngTyJr.jpeg",
+  },
+  {
+    title: "English Typing (Senior)",
+    issuer: "Typing Academy",
+    year: "2022",
+    logo: "/EngTySr.jpeg",
+  },
+  {
     title: "Distributed Systems",
     issuer: "NPTEL",
     year: "JUL-SEP 2025",
@@ -12,12 +48,6 @@ const certs = [
     issuer: "NPTEL",
     year: "JAN-FEB 2025",
     logo: "/e-waste.png",
-  },
-  {
-    title: "Computer Vision",
-    issuer: "OpenCV",
-    year: "2023",
-    logo: "https://upload.wikimedia.org/wikipedia/commons/3/32/OpenCV_Logo_with_text_svg_version.svg",
   },
 ];
 
