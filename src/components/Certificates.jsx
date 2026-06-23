@@ -61,7 +61,7 @@ export default function Certificates() {
       <div className="container fade-in">
         <div className="text-center">
           <span className="section-label">★ CERTIFICATIONS</span>
-          <h2 className="section-title">Licenses & Certs</h2>
+          <h2 className="section-title">ACHIEVEMENTS</h2>
         </div>
       </div>
       <div className="cert-marquee-wrapper">
